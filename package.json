@@ -1,0 +1,17 @@
+{
+  "name": "webapi-iv-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon server.js"
+  },
+  "repository": "https://github.com/schang1146/webapi-iv-challenge.git",
+  "author": "schang1146 <sammychang2185@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
