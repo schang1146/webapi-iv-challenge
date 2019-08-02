@@ -1,11 +1,22 @@
 const express = require("express");
+const userRouter = require("./users/userRouter");
 
 const server = express();
 
+// global 'use' pipeline
+server.use(logger);
+server.use(express.json());
+server.use("/api/users", userRouter);
+
 server.get("/", (req, res) => {
-    res.send(200);
+    res.send(`<h2>Let's write some middleware!</h2>`);
 });
 
-server.listen(4000, () => {
-    console.log(`\n* Server Running on http://localhost:4000 *\n`);
-});
+// custom middleware
+function logger(req, res, next) {
+    const now = new Date().toGMTString();
+    console.log(req.method, req.url, now);
+    next();
+}
+
+module.exports = server;
