@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/", validateUser, (req, res) => {
     const userInfo = req.body;
-    User.insert(userInfo).then(res.status(200).json({ userInfo }));
+    User.insert(userInfo).then(res.status(201).json({ userInfo }));
 });
 
 router.post("/:id/posts", validateUserId, validatePost, (req, res) => {
@@ -16,14 +16,10 @@ router.post("/:id/posts", validateUserId, validatePost, (req, res) => {
     }
 });
 
-router.get("/", async (req, res) => {
-    try {
-        const users = await User.get();
-
-        res.status(200).json(users);
-    } catch (error) {
-        res.status(500).json(error);
-    }
+router.get("/", (req, res) => {
+    User.get()
+        .then(users => res.status(200).json(users))
+        .catch(error => res.status(500).json(error));
 });
 
 router.get("/:id", validateUserId, (req, res) => {
